@@ -21,6 +21,30 @@ This work adapts concepts from combinatorial optimisation [Korte & Vygen, 2018] 
 
 ---
 
+## License
+
+This project is released under a **non-commercial license**.  
+You may use, modify, and share the code for personal or research purposes,  
+but **commercial use is prohibited without explicit permission**.
+
+
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+[![License: NC](https://img.shields.io/badge/License-Non--Commercial-red.svg)](./LICENSE)
+
+---
+
+## Cite
+
+```bibtex
+@misc{rotator_v1_0_0,
+  author       = {P, Adon},
+  title        = {Rotator Angle Optimiser for Flats},
+  year         = {2025},
+  howpublished = {\url{https://github.com/adon-phd/rotator/releases/tag/v1.0.0}},
+  note         = {Version 1.0.0, GitHub release}
+}
+```
+
 ## References
 
 ```bibtex
@@ -58,3 +82,4 @@ This work adapts concepts from combinatorial optimisation [Korte & Vygen, 2018] 
   year={2010},
   publisher={Elsevier}
 }
+```
