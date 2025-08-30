@@ -21,6 +21,93 @@ This work adapts concepts from combinatorial optimisation [Korte & Vygen, 2018] 
 
 ---
 
+
+## How to use
+
+The tool is a command-line Python script that scans light and flat frame directories, determines optimal calibration centres, and optionally tags FITS headers with the group assignments.
+
+### Installation
+
+Clone the repository and install dependencies:
+
+    git clone https://github.com/adon-phd/rotator.git
+    cd rotator
+    pip install -r requirements.txt
+
+Dependencies:
+- astropy (required) for FITS handling  
+- PuLP (optional) for integer linear programming (exact optimisation; otherwise a greedy fallback is used)  
+- openpyxl (optional) for detailed XLSX debug reports  
+
+### Basic workflow
+
+1. **Run the optimiser**
+
+    python rotator.py --lights /path/to/LIGHTS --flats /path/to/FLATS --tolerances 2 5 10
+
+   Produces a coverage report showing how many centres are needed at different tolerances.
+
+2. **Choose a tolerance**  
+   After the report, you will be prompted to select a tolerance for tagging.  
+   Example: entering `2` selects centres that cover all lights within ±2°.
+
+3. **Tag FITS headers (optional)**  
+
+    python rotator.py --lights /path/to/LIGHTS --flats /path/to/FLATS --tolerances 2 --overwrite
+
+   Add `--overwrite` to update FITS headers with the keyword ROTGRP. Without it, existing tags are preserved.
+
+4. **GUI mode (file picker only)**  
+
+    python rotator.py --gui
+
+5. **Dry run**  
+
+    python rotator.py --lights /path/to/LIGHTS --flats /path/to/FLATS --tolerances 2 --dry-run
+
+   Add `--dry-run` to test without modifying FITS files.
+
+### Example output
+
+    --- Tolerance ±2.0° ---
+    Chosen centres (optimised): 246.81, 301.08, 310.21, 314.62, 322.39
+    Covered unique angles:      25
+    Covered light frames:       1290
+    UNCOVERED unique angles:    1
+    UNCOVERED light frames:     84
+    Residual light angles:
+      308.20
+
+This shows that with ±2° tolerance, 1374 light frames are reduced to 5 calibration centres, with only a small fraction uncovered.
+
+### Common options
+
+| Option              | Description                                                                 |
+|---------------------|-----------------------------------------------------------------------------|
+| `--lights PATH`     | Root directory of LIGHT frames (required)                                   |
+| `--flats PATH`      | Root directory of FLAT frames (optional)                                    |
+| `--tolerances N...` | List of tolerances (deg) to test (default: 1 2 5 10 15)                     |
+| `--gui`             | Open GUI folder pickers if paths are not provided                           |
+| `--overwrite`       | Overwrite existing FITS keyword values when tagging                         |
+| `--dry-run`         | Run analysis and report without modifying FITS headers                      |
+| `--noninteractive`  | Skip prompt and use `--tolerance` value directly                            |
+| `--tolerance N`     | Tolerance (deg) to use with `--noninteractive`                              |
+| `--assume-lights`   | Treat files under `--lights` as LIGHT if header type is missing             |
+| `--assume-flats`    | Treat files under `--flats` as FLAT if header type is missing               |
+| `--existing-flats`  | Supply known flat angles (e.g. `300,315.26` or `300@HA 300@OIII`)           |
+| `--debug-nearest`   | Print detailed nearest-neighbour matching and write XLSX debug output       |
+
+### Recommended usage
+
+- **Planning**: Run in dry-run mode to identify the minimal set of angles where flats are required.  
+- **Calibration**: Re-run with `--overwrite` to tag light frames, ensuring WBPP or other pipelines group frames correctly.  
+- **Large projects**: For datasets spanning many filters and sessions, this tool ensures reproducible centre selection without manual trial-and-error.
+
+
+
+
+---
+
 ## License
 
 This project is released under a **non-commercial license**.  
