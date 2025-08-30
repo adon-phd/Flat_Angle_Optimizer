@@ -110,9 +110,15 @@ This shows that with ±2° tolerance, 1374 light frames are reduced to 5 calibra
 
 ## License
 
-This project is released under a **non-commercial license**.  
-You may use, modify, and share the code for personal or research purposes,  
-but **commercial use is prohibited without explicit permission**.
+
+This project is released under a **Non-Commercial License**.  
+
+You may use, modify, and share this code for personal, educational, or research purposes,  
+provided that all use remains **non-commercial** and attribution is provided.
+
+The following activities are not permitted without prior written permission:  
+- Use of this code, in whole or in part, for commercial purposes, including incorporation into proprietary products or services.  
+- Use of this code or derivative works for training or fine-tuning machine learning or artificial intelligence models.  
 
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
