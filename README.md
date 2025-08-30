@@ -24,7 +24,7 @@ This work adapts concepts from combinatorial optimisation [Korte & Vygen, 2018] 
 
 ## How to use
 
-The tool is a command-line Python script that scans light and flat frame directories, determines optimal calibration centres, and optionally tags FITS headers with the group assignments.
+The tool is a command-line Python script that scans light and flat frame directories, determines optimal calibration centres, and optionally tags FITS headers with the group assignments. THIS CODE WILL WRITE A NEW FITS HEADER to your lights. If you don't have one, MAKE A BACK UP OF YOUR FILES! No warranty is provided whatsoever. Use at your own risk.
 
 ### Installation
 
